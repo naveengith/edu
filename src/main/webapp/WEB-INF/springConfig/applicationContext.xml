@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+						
+						
+	<context:property-placeholder location="classpath:application.properties" />
+
+	
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+        destroy-method="close">
+        <property name="driverClass" 		value="${database.driverClass}" />
+        <property name="jdbcUrl" 			value="${database.url}" />
+        <property name="user" 				value="${database.username}" />
+        <property name="password" 			value="${database.password}" />
+        
+        <property name="acquireIncrement" 	value="${connection.acquireIncrement}" />
+        <property name="minPoolSize" 	  	value="${connection.minPoolSize}" />
+        <property name="maxPoolSize" 	  	value="${connection.maxPoolSize}" />
+        <property name="maxIdleTime" 		value="${connection.maxIdleTime}" />
+    </bean>
+    
+    <bean id="dbMan" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+	</bean>
+    	
+    
+   	 
+	 <context:component-scan base-package="com.psmanu.csjournal.core.dao.*" />
+	 
+	 <context:component-scan base-package="com.psmanu.csjournal.core.service.*" />
+   	 
+
+
+</beans>

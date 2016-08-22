@@ -1,0 +1,12 @@
+#add-stud-feedback {
+	display : none;
+}
+
+#btn-add-new-stud {
+	display : none;
+}
+
+#disp-studs {
+	max-height : 250px;
+	overflow-y : scroll;
+}
